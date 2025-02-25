@@ -29,4 +29,46 @@ public class DefaultController {
         model.addAttribute("map", map);
         return "index";
     }
+
+    @GetMapping("/product")
+    public String product(@RequestParam("id") Long id, Model model) {
+        Product product = productRepository.findById(id).orElse(null);
+        model.addAttribute("product", product);
+        return "product";
+    }
+
+    @GetMapping("/productTypeList")
+    public String productTypeList(Model model) {
+        Iterable<ProductType> types = productTypeRepository.findAll();
+        model.addAttribute("types", types);
+        return "productTypeList";
+    }
+
+    @GetMapping("productTypeList/add")
+    public String productTypeListAdd(Model model) {
+        ProductType productType = new ProductType();
+        model.addAttribute("productType", productType);
+        return "productTypeForm";
+    }
+
+    @PostMapping("productTypeList/add")
+    public String productTypeListAddSubmit(@ModelAttribute ProductType productType, Model model){
+        productTypeRepository.save(productType);
+        model.addAttribute("types", productTypeRepository.findAll());
+        return "productTypeList";
+    }
+
+    @GetMapping("/productTypeList/delete/{productTypeId}")
+    public String productTypeListDelete(@PathVariable("productTypeId") long id, Model model) {
+        productTypeRepository.deleteById(id);
+        model.addAttribute("types", productTypeRepository.findAll());
+        return "productTypeList";
+    }
+
+    @GetMapping("/productTypeList/edit/{productTypeId}")
+    public String productTypeListEdit(@PathVariable("productTypeId") long id, Model model) {
+        ProductType productType = productTypeRepository.findById(id).orElse(null);
+        model.addAttribute("productType", productType);
+        return "productTypeForm";
+    }
 }
