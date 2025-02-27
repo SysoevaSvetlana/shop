@@ -9,7 +9,7 @@ import ru.gb.shop.entity.ProductType;
 import ru.gb.shop.repository.ProductRepository;
 import ru.gb.shop.repository.ProductTypeRepository;
 
-import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Controller
