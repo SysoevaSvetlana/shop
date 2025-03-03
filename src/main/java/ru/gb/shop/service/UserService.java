@@ -38,6 +38,14 @@ public class UserService implements UserDetailsService {
 
         return user;
     }
+    public User findByUsername(String username){
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return user;
+    }
 
     public User findUserById(Long userId) {
         Optional<User> userFromDb = userRepository.findById(userId);

@@ -94,8 +94,19 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>5.7.8</version>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>6.2.2</version>
+        </dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
 
-		<!--		<dependency>-->
+        <!--		<dependency>-->
 <!--			<groupId>javax.servlet</groupId>-->
 <!--			<artifactId>jstl</artifactId>-->
 <!--			<version>1.2</version>-->

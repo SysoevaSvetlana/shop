@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
         <title>SurfHouse - Product</title>
@@ -91,6 +91,29 @@
                         <div>
                             <p id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum scelerisque diam, vel ultricies eros eleifend at. Aliquam erat volutpat. Nam tincidunt, ipsum eu dignissim porta, lectus lorem tempus leo, sit amet mollis nunc ligula sit amet nisl. Duis placerat nulla metus, sit amet fermentum nisi consectetur et. Mauris tempor nulla nec lacus pharetra tempus. Suspendisse potenti. Nunc molestie mattis tortor, a scelerisque lectus. Vivamus velit nunc, bibendum id convallis eget, rhoncus non purus. Integer tincidunt nulla rhoncus semper luctus. Mauris nisi tellus, condimentum sit amet pellentesque id, facilisis ac sem. Phasellus ac dolor quis nisl luctus faucibus in eu orci.</p>
                         </div>
+                    </div>
+                    <div class="comments-section">
+                        <h2>Комментарии</h2>
+                        <div th:each="comment : ${comments}" class="comment">
+                            <p th:text="${comment.text}">Текст комментария</p>
+                            <small>
+                                Написал: <span th:text="${comment.user.username}">Имя пользователя</span>
+                                <span th:text="${**temporals.format(comment.createdAt, 'dd.MM.yyyy HH:mm')}">Дата</span>**
+                            </small>
+                        </div>
+                    </div>
+
+                    <div sec:authorize="isAuthenticated()" class="add-comment">
+                        <h3>Добавить комментарий</h3>
+                        <form th:action="@{/comments/add}" method="post">
+                            <input type="hidden" name="productId" th:value="${product.id}">
+                            <textarea name="commentText" required placeholder="Введите комментарий"></textarea>
+                            <button type="submit">Отправить</button>
+                        </form>
+                    </div>
+
+                    <div sec:authorize="!isAuthenticated()" class="login-prompt">
+                        <p>Чтобы оставить комментарий, пожалуйста, <a th:href="@{/login}">войдите</a> или <a th:href="@{/register}">зарегистрируйтесь</a></p>
                     </div>
 				</div>
             </div>
