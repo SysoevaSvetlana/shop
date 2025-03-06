@@ -82,7 +82,7 @@
                         </div>
                         <div>
 <!--                            <div class="product" th:each="prod : ${element.value}" th:attr="onclick=|window.location.href='product/' + ${prod.id}|">-->
-                            <div class="product" th:each="prod : ${element.value}" th:attr="onclick=|window.location.href='product?id=' + ${prod.id}|">
+                            <a class="product" th:each="prod : ${element.value}" th:href="@{/product(id=${prod.id}z)}">
                                 <img class="triangle" src="images/New.png" alt="new" th:if="${prod.newProduct} == true">
                                 <img class="triangle" src="images/Hot.png" alt="new" th:if="${prod.hotProduct} == true">
                                 <img class="foto" th:src="@{'/images/' + ${prod.image}}" alt="">
@@ -94,7 +94,7 @@
                                         &euro; <span th:text="${prod.oldPrice}"></span>
                                     </span>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>

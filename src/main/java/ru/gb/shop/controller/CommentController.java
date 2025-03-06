@@ -16,7 +16,7 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    // Добавление комментария только для авторизованных пользователей
+
     @PostMapping("/add")
     @PreAuthorize("isAuthenticated()") // Только для авторизованных
     public String addComment(

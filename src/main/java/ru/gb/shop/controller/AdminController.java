@@ -21,7 +21,7 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    // Путь для сохранения изображений
+
     private static final String UPLOAD_DIRECTORY = "src/main/resources/static/images/";
 
     @Autowired
@@ -30,10 +30,10 @@ public class AdminController {
     @Autowired
     private ProductTypeService productTypeService;
 
-    // Страница добавления продукта
+
     @GetMapping("/product/add")
     public String showAddProductForm(Model model) {
-        // Получаем список категорий для выпадающего списка
+
         List<ProductType> categories = productTypeService.findAll();
 
         model.addAttribute("product", new Product());
@@ -42,7 +42,7 @@ public class AdminController {
         return "admin/add-product";
     }
 
-    // Обработка формы добавления продукта
+
     @PostMapping("/product/add")
     public String addProduct(
             @ModelAttribute Product product,
