@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Вход в систему</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .login-container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 300px;
+    }
+    .login-form {
+        display: flex;
+        flex-direction: column;
+    }
+    .login-form input {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .login-form button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .error-message {
+        color: red;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    .register-link {
+        text-align: center;
+        margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+<div class="login-container">
+  <form
+          th:action="@{/login}"
+          method="post"
+          class="login-form"
+  >
+
+    <div
+            th:if="${loginError}"
+            class="error-message"
+    >
+      Неверное имя пользователя или пароль
+    </div>
+
+
+    <input
+            type="text"
+            name="username"
+            placeholder="Имя пользователя"
+            required
+    >
+
+
+    <input
+            type="password"
+            name="password"
+            placeholder="Пароль"
+            required
+    >
+
+
+    <button type="submit">Войти</button>
+
+
+    <div class="register-link">
+      <p>
+        Нет аккаунта?
+        <a th:href="@{/registration}">Зарегистрируйтесь</a>
+      </p>
+    </div>
+  </form>
+</div>
+</body>
+</html>

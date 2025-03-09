@@ -1,4 +1,37 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Главная страница</title>
+</head>
+<body>
+
+<div th:if="${username}">
+    <span>Привет, <span th:text="${username}"></span>!</span>
+    <a th:href="@{/logout}">Выйти</a>
+</div>
+<div th:unless="${username}">
+    <a th:href="@{/login}">Войти</a>
+    <a th:href="@{/registration}">Регистрация</a>
+</div>
+
+
+<div th:each="entry : ${map}">
+    <h2 th:text="${entry.key.name}">Категория</h2>
+    <div th:each="product : ${entry.value}">
+        <a th:href="@{/product/{id}(id=${product.id})}">
+            <img th:src="@{'/images/' + ${product.image}}" th:alt="${product.name}">
+            <h3 th:text="${product.name}">Название продукта</h3>
+            <p th:text="${product.price}">Цена</p>
+        </a>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+<!--<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
@@ -12,7 +45,7 @@
                 <img src="images/Logo.png" alt="Logo">
                 <div class="welcome">
                     <a href="registration.jsp">Зарегестрироваться</a>
-                    <a href="login.jsp">войти</a>
+                    <a href="login.html">войти</a>
                     <p id="welcome">Welcome to surfhouse</p>
                     <p id="text">The only online store you will ever need for all your windsurfing and kitesurf&shy;ing and SUP
                         needs</p>
@@ -81,7 +114,7 @@
                             <p th:text="${element.key.name}"></p>
                         </div>
                         <div>
-<!--                            <div class="product" th:each="prod : ${element.value}" th:attr="onclick=|window.location.href='product/' + ${prod.id}|">-->
+                           <div class="product" th:each="prod : ${element.value}" th:attr="onclick=|window.location.href='product/' + ${prod.id}|">
                             <a class="product" th:each="prod : ${element.value}" th:href="@{/product(id=${prod.id}z)}">
                                 <img class="triangle" src="images/New.png" alt="new" th:if="${prod.newProduct} == true">
                                 <img class="triangle" src="images/Hot.png" alt="new" th:if="${prod.hotProduct} == true">
@@ -228,4 +261,4 @@
             </div>
         </div>
     </body>
-</html>
+</html>-->

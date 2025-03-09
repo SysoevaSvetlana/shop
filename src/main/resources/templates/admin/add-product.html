@@ -1,50 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Добавление нового продукта</title>
-    <style>
-        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; }
-        input, select, textarea { width: 100%; padding: 8px; }
-        .error { color: red; }
-        .success { color: green; }
-    </style>
+    <title>Добавление продукта</title>
 </head>
 <body>
 <h1>Добавление нового продукта</h1>
 
-
-<div th:if="${param.success}" class="success">
-    Продукт успешно добавлен!
-</div>
-
-
 <form th:action="@{/admin/product/add}" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label>Название продукта:</label>
+    <div>
+        <label>Название:</label>
         <input type="text" name="name" required>
     </div>
 
-    <div class="form-group">
+    <div>
         <label>Цена:</label>
         <input type="number" step="0.01" name="price" required>
     </div>
 
-    <div class="form-group">
+    <div>
         <label>Старая цена:</label>
         <input type="number" step="0.01" name="oldPrice">
     </div>
 
-    <div class="form-group">
-        <label>Описание:</label>
-        <textarea name="description" rows="4"></textarea>
-    </div>
-
-    <div class="form-group">
+    <div>
         <label>Категория:</label>
         <select name="productTypeId" required>
-            <option value="">Выберите категорию</option>
             <option th:each="category : ${categories}"
                     th:value="${category.id}"
                     th:text="${category.name}">
@@ -53,18 +33,18 @@
         </select>
     </div>
 
-    <div class="form-group">
+    <div>
         <label>Изображение:</label>
         <input type="file" name="imageFile" accept="image/*" required>
     </div>
 
-    <div class="form-group">
+    <div>
         <label>
             <input type="checkbox" name="newProduct"> Новый продукт
         </label>
     </div>
 
-    <div class="form-group">
+    <div>
         <label>
             <input type="checkbox" name="hotProduct"> Горячий продукт
         </label>
@@ -72,7 +52,5 @@
 
     <button type="submit">Добавить продукт</button>
 </form>
-
-<div th:if="${error}" class="error" th:text="${error}"></div>
 </body>
 </html>

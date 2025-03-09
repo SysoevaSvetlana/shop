@@ -1,5 +1,6 @@
 package ru.gb.shop.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,13 +16,19 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     //@Size(min=2, message = "Не меньше 5 знаков")
+    //@JsonFormat("usern")
     private String username;
     //@Size(min=2, message = "Не меньше 5 знаков")
     private String password;
     @Transient
     private String passwordConfirm;
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    @JoinTable(
+            name = "t_user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+//    @ManyToMany(fetch = FetchType.EAGER)
+     private Set<Role> roles;
 
     public User() {
     }

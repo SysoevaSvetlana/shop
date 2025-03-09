@@ -1,4 +1,43 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title th:text="${product.name}">Название продукта</title>
+</head>
+<body>
+<h1 th:text="${product.name}">Название продукта</h1>
+<img th:src="@{'/images/' + ${product.image}}" th:alt="${product.name}">
+<p th:text="${product.description}">Описание</p>
+<p th:text="${product.price}">Цена</p>
+
+
+<div th:if="${not #lists.isEmpty(comments)}">
+    <h2>Комментарии:</h2>
+    <div th:each="comment : ${comments}">
+        <p th:text="${comment.text}">Текст комментария</p>
+        <small th:text="${comment.user.username}">Автор</small>
+    </div>
+</div>
+
+
+<div sec:authorize="isAuthenticated()">
+    <form th:action="@{/comments/add}" method="post">
+        <input type="hidden" name="productId" th:value="${product.id}">
+        <textarea name="commentText" required placeholder="Ваш комментарий"></textarea>
+        <button type="submit">Отправить</button>
+    </form>
+</div>
+
+
+<div sec:authorize="!isAuthenticated()">
+    <p>Чтобы оставить комментарий, <a th:href="@{/login}">войдите</a></p>
+</div>
+</body>
+</html>
+
+
+
+<!--<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
@@ -203,4 +242,4 @@
             </div>
         </div>
     </body>
-</html>
+</html>-->
