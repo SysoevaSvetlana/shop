@@ -44,6 +44,23 @@ public class UserService implements UserDetailsService {
 
         return user;
     }
+    @Transactional
+    public void createAdminUser(String username, String password) {
+        User admin = new User();
+        admin.setUsername(username);
+        admin.setPassword(passwordEncoder.encode(password));
+
+        // Получаем или создаем роль ADMIN
+        Role adminRole = roleRepository.findByName("ROLE_ADMIN");
+        if (adminRole == null) {
+                    Role role = new Role();
+                    role.setName("ROLE_ADMIN");
+                    roleRepository.save(role);
+        };
+
+        admin.setRoles(Collections.singleton(adminRole));
+        userRepository.save(admin);
+    }
 
     public User findUserById(Long userId) {
         Optional<User> userFromDb = userRepository.findById(userId);

@@ -20,23 +20,45 @@ public class ProductService {
     private ProductRepository productRepository;
 
 
+    public boolean saveProduct(Product product) {
 
-    public boolean saveProduct (Product product) {
+        if (product.getId() == null) {
+
+            productRepository.save(product);
+            return true;
+        }
+
+
         Optional<Product> productFromDB = productRepository.findById(product.getId());
+        if (productFromDB.isPresent()) {
 
-        if (productFromDB != null) {
             return false;
         }
 
-        //user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-        //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
         productRepository.save(product);
         return true;
     }
 
+
+
+//    public boolean saveProduct (Product product) {
+//        Optional<Product> productFromDB = productRepository.findById(product.getId());
+//
+//        if (productFromDB != null) {
+//            return false;
+//        }
+//
+//        //user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+//        //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+//        productRepository.save(product);
+//        return true;
+//    }
+
     public boolean deleteProduct(Long productId) {
-        if (productRepository.findById(productId).isPresent()) {
-            productRepository.deleteById(productId);
+        Optional<Product> productOptional = productRepository.findById(productId);
+        if (productOptional.isPresent()) {
+            productRepository.delete(productOptional.get());
             return true;
         }
         return false;

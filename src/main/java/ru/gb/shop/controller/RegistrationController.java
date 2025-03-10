@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import ru.gb.shop.entity.Role;
 import ru.gb.shop.entity.User;
@@ -20,6 +17,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+//@
 @Controller
 @RequestMapping("/registration")
 public class RegistrationController {
@@ -43,27 +41,27 @@ public class RegistrationController {
             BindingResult bindingResult,
             Model model
     ) {
-        // Проверка наличия ошибок валидации
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errors = new HashMap<>();
-            bindingResult.getFieldErrors().forEach(
-                    error -> errors.put(error.getField(), error.getDefaultMessage())
-            );
-            model.addAttribute("errors", errors);
-            return "registration";
-        }
-
-        // Проверка совпадения паролей
-        if (!userForm.getPassword().equals(userForm.getPasswordConfirm())) {
-            model.addAttribute("passwordError", "Пароли не совпадают");
-            return "registration";
-        }
-
-        // Проверка существования пользователя
-        if (userService.findByUsername(userForm.getUsername()) != null) {
-            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
-            return "registration";
-        }
+//        // Проверка наличия ошибок валидации
+//        if (bindingResult.hasErrors()) {
+//            Map<String, String> errors = new HashMap<>();
+//            bindingResult.getFieldErrors().forEach(
+//                    error -> errors.put(error.getField(), error.getDefaultMessage())
+//            );
+//            model.addAttribute("errors", errors);
+//            return "registration";
+//        }
+//
+//        // Проверка совпадения паролей
+//        if (!userForm.getPassword().equals(userForm.getPasswordConfirm())) {
+//            model.addAttribute("passwordError", "Пароли не совпадают");
+//            return "registration";
+//        }
+//
+//        // Проверка существования пользователя
+//        if (userService.findByUsername(userForm.getUsername()) != null) {
+//            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+//            return "registration";
+//        }
 
         // Установка роли по умолчанию
         Role userRole = roleRepository.findByName("ROLE_USER");

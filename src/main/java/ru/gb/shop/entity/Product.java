@@ -3,6 +3,9 @@ package ru.gb.shop.entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity(name = "product")
 public class Product {
@@ -27,10 +30,40 @@ public class Product {
     private String image;
 
     @Column(columnDefinition = "TEXT")
-    @Basic(fetch = FetchType.LAZY) // опционально для больших текстовых полей
+    @Basic(fetch = FetchType.EAGER)// опционально для больших текстовых полей
     private String description;
 
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
+
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+        comment.setProduct(this); // Устанавливаем обратную связь
+    }
+
+    public void removeComment(Comment comment) {
+        comments.remove(comment);
+        comment.setProduct(null); // Разрываем обратную связь
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
     /*@Column(length = 65535)
     @Type(type = "text")
     private String description;*/

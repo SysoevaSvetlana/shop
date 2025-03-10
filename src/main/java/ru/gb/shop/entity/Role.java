@@ -3,6 +3,7 @@ package ru.gb.shop.entity;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,7 +16,7 @@ public class Role implements GrantedAuthority {
 
     //@Transient
     @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    private Set<User> users = new HashSet<>();
     public Role() {
     }
 
