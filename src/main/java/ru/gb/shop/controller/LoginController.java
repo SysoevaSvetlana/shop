@@ -15,6 +15,12 @@ public class LoginController implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");}
 
+    @GetMapping("/login-error")
+    public String loginError(Model model) {
+
+        return "login-error";
+    }
+
 //
 //    @GetMapping("/login")
 //    public String login(Authentication authentication) {

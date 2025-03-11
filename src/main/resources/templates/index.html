@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Главная страница</title>
 </head>
 <body>
-
 <div th:if="${username}">
     <span>Привет, <span th:text="${username}"></span>!</span>
     <a th:href="@{/logout}">Выйти</a>
@@ -15,7 +13,20 @@
     <a th:href="@{/registration}">Регистрация</a>
 </div>
 
+<!-- Фильтр по категориям -->
+<div>
+    <label>Фильтр по категории:</label>
+    <select onchange="location = this.value;">
+        <option value="/">Все категории</option>
+        <option th:each="category : ${categories}"
+                th:value="@{/?categoryId={id}(id=${category.id})}"
+                th:selected="${selectedCategoryId == category.id}"
+                th:text="${category.name}">
+        </option>
+    </select>
+</div>
 
+<!-- Отображение продуктов -->
 <div th:each="entry : ${map}">
     <h2 th:text="${entry.key.name}">Категория</h2>
     <div th:each="product : ${entry.value}">

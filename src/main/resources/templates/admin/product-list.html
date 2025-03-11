@@ -53,8 +53,7 @@
         <td th:text="${product.newProduct}">Новый</td>
         <td th:text="${product.hotProduct}">Горячий</td>
         <td>
-            <a th:href="@{/admin/product/edit/{id}(id=${product.id})}"
-               class="btn btn-edit">Изменить</a>
+
             <a th:href="@{/admin/product/delete/{id}(id=${product.id})}"
                class="btn btn-delete"
                onclick="return confirm('Вы уверены, что хотите удалить этот продукт?')">Удалить</a>

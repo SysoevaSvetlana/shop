@@ -39,21 +39,14 @@ public class ProductService {
         productRepository.save(product);
         return true;
     }
+    // Найти продукты по ID категории
+    public List<Product> findProductsByCategory(Long categoryId) {
+        return productRepository.findByProductType_Id(categoryId);
+    }
 
 
 
-//    public boolean saveProduct (Product product) {
-//        Optional<Product> productFromDB = productRepository.findById(product.getId());
-//
-//        if (productFromDB != null) {
-//            return false;
-//        }
-//
-//        //user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-//        //user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-//        productRepository.save(product);
-//        return true;
-//    }
+
 
     public boolean deleteProduct(Long productId) {
         Optional<Product> productOptional = productRepository.findById(productId);
@@ -74,10 +67,7 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
-//    // Сохранить продукт
-//    public Product save(Product product) {
-//        return productRepository.save(product);
-//    }
+
 
     // Удалить продукт
     public void delete(Product product) {

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ошибка входа</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #dc3545; /* Красный цвет для ошибки */
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        a {
+            color: #007bff; /* Синий цвет для ссылок */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Ошибка входа</h1>
+    <p>Неверное имя пользователя или пароль. Пожалуйста, попробуйте снова.</p>
+    <p>
+        <a th:href="@{/login}">Повторить попытку входа</a>
+    </p>
+    <p>
+        Если у вас еще нет аккаунта, вы можете
+        <a th:href="@{/registration}">зарегистрироваться</a>.
+    </p>
+</div>
+</body>
+</html>
