@@ -68,7 +68,7 @@ public class Product {
     @Type(type = "text")
     private String description;*/
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="product_type_id")
     private ProductType productType;
 
