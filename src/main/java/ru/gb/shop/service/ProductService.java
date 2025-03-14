@@ -45,9 +45,6 @@ public class ProductService {
     }
 
 
-
-
-
     public boolean deleteProduct(Long productId) {
         Optional<Product> productOptional = productRepository.findById(productId);
         if (productOptional.isPresent()) {

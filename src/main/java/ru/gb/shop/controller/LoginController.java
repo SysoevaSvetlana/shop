@@ -21,20 +21,4 @@ public class LoginController implements WebMvcConfigurer {
         return "login-error";
     }
 
-//
-//    @GetMapping("/login")
-//    public String login(Authentication authentication) {
-//        if (authentication != null && authentication.isAuthenticated()) {
-//
-//            return "redirect:/index";
-//        }
-//        return "login";
-//    }
-//
-//    @GetMapping("/login-error")
-//    public String loginError(Model model) {
-//
-//        model.addAttribute("loginError", true);
-//        return "login";
-//    }
 }

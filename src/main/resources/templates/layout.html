@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html
+    xmlns:th="http://www.thymeleaf.org"
+    th:fragment="layout (title, content)"
+>
+    <head>
+        <title th:replace="${title}"></title>
+        <link rel="stylesheet" type="text/css" th:href="@{/styles/main.css}" href="../static/styles/main.css"/>
+    </head>
+
+    <body>
+        <div class="header">
+            <p>ShopSharlotka</p>
+            <div class="nav">
+                <a href="#">Каталог</a>
+                <a href="#">Контакты</a>
+            </div>
+        </div>
+        <div id="app" class="container">
+            <div th:replace="${content}">
+                <p>Layout content</p>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+

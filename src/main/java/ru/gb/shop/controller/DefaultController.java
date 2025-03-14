@@ -29,21 +29,8 @@ public class DefaultController {
     @Autowired
     ProductRepository productRepository;
 
-//        @GetMapping({"/", "/index"})
-//    public String index(Model model, Principal principal) {
-//        Iterable<ProductType> types = productTypeRepository.findAll();
-//        Map<ProductType, List<Product>> map = new HashMap<>();
-//        types.forEach(type -> map.put(type, productRepository.findByProductType(type)));
-//
-//        model.addAttribute("map", map);
-//
-//        // Добавляем информацию о пользователе
-//        if (principal != null) {
-//            model.addAttribute("username", principal.getName());
-//        }
-//
-//        return "index";
-//    }
+
+
     @GetMapping({"/", "/index"})
     public String index(
             @RequestParam(required = false) Long categoryId,

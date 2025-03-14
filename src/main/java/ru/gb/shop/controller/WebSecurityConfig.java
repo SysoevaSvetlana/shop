@@ -1,4 +1,5 @@
 package ru.gb.shop.controller;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -27,28 +28,28 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Disable CSRF protection (optional, enable if needed)
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/index", "/product/**", "/registration", "/login", "/resources/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login") // Custom login page
-                        .loginProcessingUrl("/login") // URL to process login
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
                         .successHandler((request, response, auth) -> {
-                            // Redirect based on user role
+
                             if (isAdmin(auth)) {
                                 response.sendRedirect("/admin/products");
                             } else {
                                 response.sendRedirect("/");
                             }
                         })
-                        .failureUrl("/login-error") // Redirect on login failure
+                        .failureUrl("/login-error")
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/") // Redirect after logout
+                        .logoutSuccessUrl("/")
                         .permitAll()
                 );
 
@@ -60,15 +61,7 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public AuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-//        provider.setUserDetailsService(userService); // Use the injected UserService
-//        provider.setPasswordEncoder(passwordEncoder()); // Use the BCrypt encoder
-//        return provider;
-//    }
 
-    // Helper method to check if the user has the ADMIN role
     private boolean isAdmin(Authentication auth) {
         return auth.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));

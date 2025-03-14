@@ -42,3 +42,57 @@
 
 
 
+
+
+
+
+
+
+<!--!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      th:replace="~{layout :: layout(~{::title/text()}, ~{::#content})}"
+      <link rel="stylesheet" type="text/css" th:href="@{/styles/main.css}" href="../static/styles/main.css"/>
+>
+    <head>
+        <title>About</title>
+    </head>
+
+    <body>
+        <div id="content" class="main-content">
+            <div th:if="${username}" class="title-main">
+                <span>Привет, <span th:text="${username}"></span>!</span>
+                <a th:href="@{/logout}">Выйти</a>
+            </div>
+            <div th:unless="${username}">
+                <a th:href="@{/login}">Войти</a>
+                <a th:href="@{/registration}">Регистрация</a>
+            </div>
+
+            -Фильтр по категориям
+            <div>
+                <label>Фильтр по категории:</label>
+                <select onchange="location = this.value;">
+                    <option value="/">Все категории</option>
+                    <option th:each="category : ${categories}"
+                            th:value="@{/?categoryId={id}(id=${category.id})}"
+                            th:selected="${selectedCategoryId == category.id}"
+                            th:text="${category.name}">
+                    </option>
+                </select>
+            </div>
+
+            Отображение продуктов
+            <div th:each="entry : ${map}">
+                <h2 th:text="${entry.key.name}">Категория</h2>
+                <div th:each="product : ${entry.value}">
+                    <a th:href="@{/product/{id}(id=${product.id})}">
+                        <img th:src="@{'/images/' + ${product.image}}" th:alt="${product.name}">
+                        <h3 th:text="${product.name}">Название продукта</h3>
+                        <p th:text="${product.price}">Цена</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>-->

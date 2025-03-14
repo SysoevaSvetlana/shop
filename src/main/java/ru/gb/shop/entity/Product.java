@@ -30,7 +30,7 @@ public class Product {
     private String image;
 
     @Column(columnDefinition = "TEXT")
-    @Basic(fetch = FetchType.EAGER)// опционально для больших текстовых полей
+    @Basic(fetch = FetchType.EAGER)
     private String description;
 
 
@@ -68,7 +68,8 @@ public class Product {
     @Type(type = "text")
     private String description;*/
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    //@ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="product_type_id")
     private ProductType productType;
 
